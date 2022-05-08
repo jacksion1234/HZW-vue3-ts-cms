@@ -1,2 +1,29 @@
-# vue3-ts-cms
-基于vue3+ts的后台管理系统
+# vue3-ts-hgdemo
+
+## Project setup
+
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+
+```
+yarn serve
+```
+
+### Compiles and minifies for production
+
+```
+yarn build
+```
+
+### Lints and fixes files
+
+```
+yarn lint
+```
+
+### Customize configuration
+
+See [Configuration Reference](https://cli.vuejs.org/config/).
