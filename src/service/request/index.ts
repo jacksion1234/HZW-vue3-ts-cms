@@ -2,6 +2,7 @@ import axios from 'axios'
 import { AxiosInstance } from 'axios'
 import { ZWRequestConfig, ZWRequestInterceptors } from './types'
 import { ElLoading } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
 
 const DEFAULT_LOADING = true
@@ -56,6 +57,16 @@ class ZWRequest {
       (error) => {
         this.loading?.close()
         // 例子: 判断不同的HttpErrorCode显示不同的错误信息
+        switch (error.response.status) {
+          case 401:
+            ElMessage.error('无效的token')
+            break
+          case 404:
+            ElMessage.error('404错误')
+            break
+          default:
+            ElMessage.error('网络出错啦')
+        }
         if (error.response.status === 404) {
           console.log('404的错误~')
         }
