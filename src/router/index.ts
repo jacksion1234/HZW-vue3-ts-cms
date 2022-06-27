@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Login from '../views/login/login.vue'
-import HelloWorld from '../components/HelloWorld.vue'
-import Main from '../views/main/main.vue'
 import LocalStorage from '../utils/cache'
+// import NOTFOUND from '../views/not-found/NOTFOUND.vue'
+const Login = () => import('../views/login/login.vue')
+const HelloWorld = () => import('../components/HelloWorld.vue')
+const NOTFOUND = () => import('../views/not-found/NOTFOUND.vue')
+const Main = () => import('../views/main/main.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,8 +23,13 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/main',
-    name: 'Main',
+    name: 'main',
     component: Main
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NOTFOUND',
+    component: NOTFOUND
   }
 ]
 

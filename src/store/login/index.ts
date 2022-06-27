@@ -2,6 +2,7 @@ import { Module } from 'vuex'
 import { LoginType } from './types'
 import { getUserInfo, login, getMenuByRoleId } from '../../api/login/index'
 import { IAccount } from '@/api/login/types'
+import { mapRoutesAction } from '../../utils/map-routes'
 import LocalCache from '@/utils/cache'
 import router from '@/router'
 
@@ -23,6 +24,14 @@ const loginModule: Module<LoginType, any> = {
     },
     saveUserMenu(state, userMenu: any) {
       state.userMenu = userMenu
+      // 加载动态路由
+      const asyncRoutes = mapRoutesAction(userMenu)
+      console.log('异步路由：', asyncRoutes)
+
+      asyncRoutes.forEach((route) => {
+        router.addRoute('main', route)
+      })
+      // console.log('最终的实际路由', router)
     }
   },
   actions: {
