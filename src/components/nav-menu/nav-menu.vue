@@ -69,7 +69,7 @@ export default defineComponent({
       console.log(item.url)
 
       router.push({
-        path: item.url
+        path: item.url ?? '/NOTFOUND'
       })
     }
     return {
