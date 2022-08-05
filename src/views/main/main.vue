@@ -47,7 +47,7 @@ export default defineComponent({
 .main {
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: #f4f4f4;
   .main-content {
     width: 100%;
     height: 100%;
@@ -58,6 +58,7 @@ export default defineComponent({
       height: 100%;
       .page-header {
         height: 48px;
+        background-color: #fff;
       }
     }
   }

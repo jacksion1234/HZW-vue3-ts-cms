@@ -5,6 +5,15 @@ const Components = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 module.exports = {
   outputDir: './cms-web',
+  pages: {
+    index: {
+      // page 的入口
+      entry: 'src/main.ts',
+      // 模板来源
+      template: 'public/index.html',
+      title: '后台管理系统'
+    }
+  },
   // publicPath: '/', // 改变相对路径，能使本地的包可以在本地访问资源，但是上到服务器中的包不要开启此配置
   // 直接通过CLI提供给我们的选项来配置
   configureWebpack: {
