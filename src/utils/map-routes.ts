@@ -1,4 +1,7 @@
+import { menuEmits } from 'element-plus'
 import { RouteRecordRaw } from 'vue-router'
+
+const firstName: string | null = null
 export function mapRoutesAction(userMenus: any): RouteRecordRaw[] {
   const Routes: RouteRecordRaw[] = []
   // 获取全部的路由
@@ -31,4 +34,38 @@ export function mapRoutesAction(userMenus: any): RouteRecordRaw[] {
   // console.log('最终匹配的路由', Routes)
 
   return Routes
+}
+
+export function pathMapToMenu(menus: any[], currentPath: string): any {
+  for (const menu of menus) {
+    if (menu.type === 1) {
+      // 一级菜单，继续递归
+      if (menu.children && menu.children.length > 0) {
+        const findMenu = pathMapToMenu(menu.children ?? [], currentPath)
+        if (findMenu) {
+          return findMenu
+        }
+      }
+    } else {
+      // 二级菜单，直接返回
+      if (currentPath === menu.url) {
+        return menu
+      }
+    }
+  }
+  // const res = menus.find((menu: any) => {
+  //   // console.log(menu, currentPath)
+  //   if (menu.type === 1) {
+  //     // 一级菜单，继续递归
+  //     if (menu.children && menu.children.length > 0) {
+  //       pathMapToMenu(menu.children, currentPath)
+  //     }
+  //   } else {
+  //     // 二级菜单，直接返回
+  //     if (currentPath === menu.url) {
+  //       return true
+  //     }
+  //   }
+  // })
+  // return res
 }

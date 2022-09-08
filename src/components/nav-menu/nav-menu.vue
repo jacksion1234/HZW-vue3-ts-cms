@@ -5,7 +5,7 @@
       <span v-if="!isCollapse" class="title">Vue3+TS</span>
     </div>
     <el-menu
-      :default-active="currentActive"
+      :default-active="defaultRouter"
       class="el-menu-vertical-demo"
       :collapse="isCollapse"
       :unique-opened="true"
@@ -26,11 +26,8 @@
               </el-icon>
               <span>{{ item.name }}</span>
             </template>
-            <template v-for="subitem in item.children" :key="subitem.url">
-              <el-menu-item
-                :index="subitem.url + ''"
-                @click="showPage(subitem)"
-              >
+            <template v-for="subitem in item.children" :key="subitem.id">
+              <el-menu-item :index="subitem.id + ''" @click="showPage(subitem)">
                 <i
                   v-if="subitem.icon"
                   class="el-icon"
@@ -52,7 +49,9 @@
 <script lang="ts">
 import { defineComponent, computed, ref, watchEffect } from 'vue'
 import { useStore } from '@/store'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { pathMapToMenu } from '@/utils/map-routes'
+import { log } from 'console'
 // import { us } from 'vuex'
 
 export default defineComponent({
@@ -66,12 +65,18 @@ export default defineComponent({
     // const isCollapse = ref(false)
     let currentActive = ref('')
     const store = useStore()
-    const router = useRouter()
-    console.log('当前路由', router)
-
     const menuList = computed(() => store.state.login.userMenu)
+    // console.log('菜单', menuList.value)
+
+    // router
+    const router = useRouter()
+    const currentRoute = useRoute().path
+
+    const menu = pathMapToMenu(menuList.value, currentRoute)
+    console.log('当前菜单', menu)
+    const defaultRouter = ref(menu.id + '')
     const showPage = (item: any) => {
-      console.log(item)
+      // console.log(item)
       // currentActive.value = item.url + ''
       router.push({
         path: item.url ?? '/NOTFOUND'
@@ -82,7 +87,7 @@ export default defineComponent({
     })
     // computed()
     return {
-      currentActive,
+      defaultRouter,
       menuList,
       showPage
     }

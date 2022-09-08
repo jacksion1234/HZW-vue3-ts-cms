@@ -32,7 +32,7 @@ export default defineComponent({
   setup() {
     let isCollapse = ref(false)
     const changCollapse = () => {
-      // console.log('main页面接收')
+      console.log('main页面接收')
       isCollapse.value = !isCollapse.value
     }
     return {
