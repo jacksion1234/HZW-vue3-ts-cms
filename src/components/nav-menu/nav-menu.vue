@@ -51,7 +51,6 @@ import { defineComponent, computed, ref, watchEffect } from 'vue'
 import { useStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { pathMapToMenu } from '@/utils/map-routes'
-import { log } from 'console'
 // import { us } from 'vuex'
 
 export default defineComponent({
@@ -65,16 +64,16 @@ export default defineComponent({
     // const isCollapse = ref(false)
     let currentActive = ref('')
     const store = useStore()
-    const menuList = computed(() => store.state.login.userMenu)
     // console.log('菜单', menuList.value)
 
     // router
     const router = useRouter()
     const currentRoute = useRoute().path
 
+    const menuList = computed(() => store.state.login.userMenu)
     const menu = pathMapToMenu(menuList.value, currentRoute)
-    console.log('当前菜单', menu)
-    const defaultRouter = ref(menu.id + '')
+    // console.log('当前菜单', menu)
+    const defaultRouter = ref(menu ? menu.id + '' : '')
     const showPage = (item: any) => {
       // console.log(item)
       // currentActive.value = item.url + ''

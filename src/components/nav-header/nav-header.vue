@@ -4,12 +4,17 @@
       <Expand v-if="isCollapse" />
       <Fold v-else />
     </el-icon>
-    <breadcrumb></breadcrumb>
+    <breadcrumb :breadcrumbs="breadcrumbs"></breadcrumb>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
+import { useStore } from '@/store'
 import Breadcrumb from '@/base-ui/breadcrumb/index'
+import { pathBreadcrumb } from '@/utils/map-routes'
+import { useRoute } from 'vue-router'
+
 defineProps({
   isCollapse: {
     type: Boolean,
@@ -21,6 +26,14 @@ const handleCollapse = () => {
   // console.log('触发点击事件')
   em('changCollapse')
 }
+const breadcrumbs = computed(() => {
+  const store = useStore()
+  const menuList = computed(() => store.state.login.userMenu)
+  const currentRoute = useRoute().path
+  const breadcrumbsList = pathBreadcrumb(menuList.value, currentRoute)
+  console.log('面包屑', breadcrumbsList)
+  return breadcrumbsList
+})
 </script>
 
 <style scoped lang="less">

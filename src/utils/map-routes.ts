@@ -1,5 +1,6 @@
 import { menuEmits } from 'element-plus'
 import { RouteRecordRaw } from 'vue-router'
+import { IBreadcrumb } from '@/base-ui/breadcrumb/types'
 
 const firstName: string | null = null
 export function mapRoutesAction(userMenus: any): RouteRecordRaw[] {
@@ -35,18 +36,29 @@ export function mapRoutesAction(userMenus: any): RouteRecordRaw[] {
 
   return Routes
 }
-
-export function pathMapToMenu(menus: any[], currentPath: string): any {
+export function pathBreadcrumb(menus: any[], currentPath: string) {
+  const breadcrumbList: IBreadcrumb[] = []
+  pathMapToMenu(menus, currentPath, breadcrumbList)
+  return breadcrumbList
+}
+export function pathMapToMenu(
+  menus: any[],
+  currentPath: string,
+  breadcrumbList?: IBreadcrumb[]
+): any {
   for (const menu of menus) {
     if (menu.type === 1) {
       // 一级菜单，继续递归
       if (menu.children && menu.children.length > 0) {
         const findMenu = pathMapToMenu(menu.children ?? [], currentPath)
         if (findMenu) {
+          breadcrumbList?.push({ name: menu.name })
+          breadcrumbList?.push({ name: findMenu.name })
           return findMenu
         }
       }
     } else {
+      breadcrumbList?.push({ path: menu.url, name: menu.name })
       // 二级菜单，直接返回
       if (currentPath === menu.url) {
         return menu

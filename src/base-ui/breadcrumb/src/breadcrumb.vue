@@ -2,20 +2,21 @@
   <div>
     <el-breadcrumb separator="/">
       <template v-for="item in breadcrumbs" :key="item.path">
-        <el-breadcrumb-item :to="{ path: item.path }"
-          >homepage</el-breadcrumb-item
-        >
+        <el-breadcrumb-item :to="{ path: item.path }">{{
+          item.name
+        }}</el-breadcrumb-item>
       </template>
     </el-breadcrumb>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, PropType } from 'vue'
+import { PropType } from 'vue'
 import { IBreadcrumb } from '../types'
-const props = defineProps({
+defineProps({
   breadcrumbs: {
-    type: Array as PropType<IBreadcrumb[]>
+    type: Array as PropType<IBreadcrumb[]>,
+    default: () => []
   }
 })
 </script>
