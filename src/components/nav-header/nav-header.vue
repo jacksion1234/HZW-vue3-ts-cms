@@ -31,7 +31,7 @@ const breadcrumbs = computed(() => {
   const menuList = computed(() => store.state.login.userMenu)
   const currentRoute = useRoute().path
   const breadcrumbsList = pathBreadcrumb(menuList.value, currentRoute)
-  console.log('面包屑', breadcrumbsList)
+  // console.log('面包屑', breadcrumbsList)
   return breadcrumbsList
 })
 </script>
