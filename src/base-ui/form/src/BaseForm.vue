@@ -1,5 +1,8 @@
 <template>
   <div class="main-form">
+    <div class="header">
+      <slot name="header"></slot>
+    </div>
     <el-form
       :label-position="labelPosition"
       :label-width="labelWidth"
@@ -12,13 +15,14 @@
               <template
                 v-if="item.type === 'input' || item.type === 'password'"
               >
-                <el-input />
+                <el-input v-model="formData[item.field]" />
               </template>
               <template v-else-if="item.type === 'select'">
                 <el-select
                   :placeholder="item.placeholder"
                   v-bind="item.otherOptions"
                   style="width: 100%"
+                  v-model="formData[item.field]"
                 >
                   <el-option
                     v-for="option in item.options"
@@ -34,6 +38,7 @@
                   :placeholder="item.placeholder"
                   v-bind="item.otherOptions"
                   style="width: 100%"
+                  v-model="formData[item.field]"
                 />
               </template>
             </el-form-item>
@@ -41,13 +46,20 @@
         </template>
       </el-row>
     </el-form>
+    <div class="footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, PropType } from 'vue'
+import { ref, watch, reactive, PropType } from 'vue'
 import { IFormItem } from '../types'
 const props = defineProps({
+  modelValue: {
+    type: Object,
+    required: true
+  },
   formItems: {
     type: Array as PropType<IFormItem[]>,
     default: () => []
@@ -78,13 +90,21 @@ const props = defineProps({
   }
 })
 console.log(props)
-
+// 这一步相当于复制了一份传来的modelValue，以免接下来的操作会直接改变父页面传来的值
+const formData = ref({ ...props.modelValue })
 const labelPosition = ref('center')
-const formData = reactive({
-  name: '',
-  region: '',
-  type: ''
-})
+const emit = defineEmits(['update:modelValue'])
+watch(
+  formData,
+  (value) => {
+    console.log('formData改变了')
+
+    emit('update:modelValue', value)
+  },
+  {
+    deep: true
+  }
+)
 </script>
 
 <style scoped>

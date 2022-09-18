@@ -1,16 +1,15 @@
 <template>
   <div class="user">
     <h2>user11</h2>
-    <HZWForm v-bind="SearchConfigs"></HZWForm>
+    <search-form :SearchConfigs="SearchConfigs"></search-form>
   </div>
 </template>
 
 <script lang="ts" setup>
 // import { defineComponent } from 'vue'
-import HZWForm from '@/base-ui/form/src/BaseForm.vue'
-import searchConfigs from './config'
-import { reactive } from 'vue'
-const SearchConfigs = searchConfigs
+import SearchForm from '@/components/search-form/index'
+import SearchConfigs from './config'
+// import { reactive } from 'vue'
 // export default defineComponent({
 //   name: 'user',
 //   setup() {
