@@ -32,7 +32,7 @@ declare module '@vue/runtime-core' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     NavHeader: typeof import('./src/components/nav-header/nav-header.vue')['default']
-    NavMenu: typeof import('./src/components/nav-menu/nav-menu.vue')['default']
+    NavMenu: typeof import('./src/components/nav-menu/src/nav-menu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchForm: typeof import('./src/components/search-form/src/search-form.vue')['default']

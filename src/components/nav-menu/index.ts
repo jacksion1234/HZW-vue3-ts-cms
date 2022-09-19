@@ -1,3 +1,3 @@
-import NavMenu from './nav-menu.vue'
+import NavMenu from './src/nav-menu.vue'
 
 export default NavMenu

@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <h2>user11</h2>
+    <!-- <h2>user11</h2> -->
     <search-form :SearchConfigs="SearchConfigs"></search-form>
   </div>
 </template>

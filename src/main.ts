@@ -4,7 +4,6 @@ import router from './router'
 import store from './store'
 import { recoverStore } from './store'
 // import ZWRequest from './service'
-import 'normalize.css'
 import '../src/assets/css/index.less'
 import Global from './global/index'
 

@@ -1,24 +1,25 @@
 <template>
   <div>
     <!-- 此处之所以不直接用传递formData，是为了防止子页面直接改变父页面的数据 -->
-    <HZW-Form v-bind="SearchConfigs" v-model="formData">
+    <HZWForm v-bind="SearchConfigs" v-model="formData">
       <template #header>
-        <h1 class="header">高级检索</h1>
+        <div class="header">高级检索</div>
       </template>
       <template #footer>
         <div class="handle-btns">
-          <el-button icon="el-icon-refresh" @click="handleResetClick"
-            >重置</el-button
+          <el-button :icon="Refresh" @click="handleResetClick">重置</el-button>
+          <el-button :icon="Search" type="primary" @click="search"
+            >搜索</el-button
           >
-          <el-button type="primary" icon="el-icon-search">搜索</el-button>
         </div>
       </template>
-    </HZW-Form>
+    </HZWForm>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch } from 'vue'
+import { ref } from 'vue'
+import { Search, Refresh } from '@element-plus/icons-vue'
 import HZWForm from '@/base-ui/form/src/BaseForm.vue'
 import { getFormData } from '@/utils/common'
 const props = defineProps({
@@ -40,6 +41,9 @@ const handleResetClick = () => {
     formData.value[key] = ''
   }
 }
+const search = () => {
+  console.log('触发查询')
+}
 // watch(
 //   formData,
 //   () => {
@@ -49,4 +53,14 @@ const handleResetClick = () => {
 // )
 </script>
 
-<style scoped></style>
+<style scoped>
+.header {
+  padding: 20px 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+.handle-btns {
+  padding: 10px 20px;
+  text-align: right;
+}
+</style>
