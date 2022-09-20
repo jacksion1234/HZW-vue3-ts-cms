@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 此处之所以不直接用传递formData，是为了防止子页面直接改变父页面的数据 -->
-    <HZWForm v-bind="SearchConfigs" v-model="formData">
+    <zw-form v-bind="SearchConfigs" v-model="formData">
       <template #header>
         <div class="header">高级检索</div>
       </template>
@@ -13,14 +13,14 @@
           >
         </div>
       </template>
-    </HZWForm>
+    </zw-form>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Search, Refresh } from '@element-plus/icons-vue'
-import HZWForm from '@/base-ui/form/src/BaseForm.vue'
+import zwForm from '@/base-ui/form'
 import { getFormData } from '@/utils/common'
 const props = defineProps({
   SearchConfigs: {

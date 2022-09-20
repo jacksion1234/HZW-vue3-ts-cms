@@ -1,4 +1,4 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import HZWForm from './src/from.vue'
+import zwForm from './src/zwForm.vue'
 
-export default HZWForm
+export default zwForm
