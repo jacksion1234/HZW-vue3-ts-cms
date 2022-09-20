@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import zwTable from '@/base-ui/table'
+import { useStore } from 'vuex'
 defineProps({
   tableContentConfig: {
     type: Object,
@@ -20,6 +21,15 @@ const tableData = ref([
   { sport: '篮球', id: 1, age: 18, name: 'Tom' },
   { sport: '篮球', id: 1, age: 18, name: 'Tom' }
 ])
+// const tableData =
+const store = useStore()
+store.dispatch('system/getPageListAction', {
+  url: 'users/list',
+  queryInfo: {
+    offset: 1,
+    size: 10
+  }
+})
 </script>
 
 <style scoped>
