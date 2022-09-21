@@ -1,5 +1,5 @@
 export interface ISystemType {
-  userList: any[]
+  usersList: any[]
   usersCount: number
   roleList: any[]
   roleCount: number

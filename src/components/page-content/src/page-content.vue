@@ -1,34 +1,51 @@
 <template>
   <div class="page-content">
-    <zw-table :tableData="tableData" v-bind="tableContentConfig"> </zw-table>
+    <zw-table :tableData="tableData" v-bind="tableContentConfig">
+      <template #header>
+        <el-button type="primary">新增用户</el-button>
+      </template>
+      <template #enable="{ row }">
+        <el-button
+          size="small"
+          plain
+          :type="row.enable === 1 ? 'success' : 'danger'"
+        >
+          {{ row.enable === 1 ? '启用' : '禁用' }}
+        </el-button>
+      </template>
+      <template #createAt="{ row }">
+        <span>{{ $filters.foo(row.createAt) }}</span>
+      </template>
+    </zw-table>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed } from 'vue'
 import zwTable from '@/base-ui/table'
 import { useStore } from 'vuex'
-defineProps({
+const props = defineProps({
   tableContentConfig: {
     type: Object,
     required: true
+  },
+  pagename: {
+    type: String
   }
 })
-const tableData = ref([
-  { sport: '篮球', id: 1, age: 18, name: 'Tom' },
-  { sport: '篮球', id: 1, age: 18, name: 'Tom' },
-  { sport: '篮球', id: 1, age: 18, name: 'Tom' },
-  { sport: '篮球', id: 1, age: 18, name: 'Tom' },
-  { sport: '篮球', id: 1, age: 18, name: 'Tom' }
-])
-// const tableData =
 const store = useStore()
-store.dispatch('system/getPageListAction', {
-  url: 'users/list',
-  queryInfo: {
-    offset: 1,
-    size: 10
-  }
+function getListData() {
+  store.dispatch('system/getPageListAction', {
+    pagename: props.pagename,
+    queryInfo: {
+      offset: 1,
+      size: 10
+    }
+  })
+}
+getListData()
+const tableData = computed(() => {
+  return store.getters['system/pageListData'](props.pagename)
 })
 </script>
 

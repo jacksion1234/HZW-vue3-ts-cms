@@ -1,8 +1,7 @@
-import { menuEmits } from 'element-plus'
 import { RouteRecordRaw } from 'vue-router'
 import { IBreadcrumb } from '@/base-ui/breadcrumb/types'
 
-const firstName: string | null = null
+// const firstName: string | null = null
 export function mapRoutesAction(userMenus: any): RouteRecordRaw[] {
   const Routes: RouteRecordRaw[] = []
   // 获取全部的路由

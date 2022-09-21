@@ -111,5 +111,6 @@ watch(
 <style scoped>
 .main-form {
   background-color: #fff;
+  padding: 0 20px;
 }
 </style>

@@ -26,6 +26,7 @@
         <el-table-column
           :width="item.width"
           :minWidth="item.minWidth"
+          show-overflow-tooltip
           v-bind="item"
           align="center"
         >
@@ -70,4 +71,10 @@ defineProps({
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.header {
+  padding: 20px 0;
+  display: flex;
+  height: 40px;
+}
+</style>
